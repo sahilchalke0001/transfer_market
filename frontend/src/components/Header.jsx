@@ -1,14 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
 import { motion } from "framer-motion";
-import fcbLogo from "../assets/headerimg.png";
+import fcbLogo from "../assets/download.png";
 import { SignedOut, SignedIn, useUser } from "@clerk/clerk-react";
-import { FaSignInAlt } from "react-icons/fa";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 
 function Header() {
   const { user } = useUser();
   const navigate = useNavigate();
+
+  const sectors = [
+    { name: "La Liga", path: "/laliga" },
+    { name: "Premier League", path: "/premierleague" },
+    { name: "Bundesliga", path: "/bundesliga" },
+    { name: "Serie A", path: "/seriea" },
+    { name: "chat-bot", path: "/" },
+    { name: "Football News", path: "/news" },
+    { name: "Player Valuation", path: "/player-valuation" },
+    { name: "Football Matches", path: "/matches" },
+    { name: "Player Detection", path: "/player-detection" },
+    { name: "Live Chat", path: "/chat" },
+  ];
 
   return (
     <motion.header
@@ -18,13 +30,29 @@ function Header() {
       transition={{ duration: 0.8 }}
     >
       <div className="chatbot-header-content">
-        <img src={fcbLogo} alt="FCB Logo" className="madrid-logo" />
-        <h1>Pedro Gonçalves</h1>
-        <img src={fcbLogo} alt="FCB Logo" className="madrid-logo" />
+        <img src={fcbLogo} alt="Logo" className="madrid-logo" />
+        <h1>Cristiano Ronaldo</h1>
+        <img src={fcbLogo} alt="Logo" className="madrid-logo" />
       </div>
 
-      <p>❤️💙 Visca el Barça! 💙❤️</p>
+      <p>🔵⚪ Hala Madrid! ⚪🔵</p>
 
+      {/* Navigation Sectors */}
+      <nav className="league-nav">
+        {sectors.map((sector, index) => (
+          <motion.button
+            key={index}
+            className="league-btn"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate(sector.path)}
+          >
+            {sector.name}
+          </motion.button>
+        ))}
+      </nav>
+
+      {/* Sign In / Out Buttons */}
       <div className="sign-button-container">
         <SignedOut>
           <button className="sign-button" onClick={() => navigate("/sign-in")}>

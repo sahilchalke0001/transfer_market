@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
-import HeroImage from "../assets/Hero.jpg";
+import HeroImage from "../assets/Hero.png";
 import "./Hero.css";
 import { FiSend } from "react-icons/fi";
 

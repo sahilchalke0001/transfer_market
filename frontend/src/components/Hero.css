@@ -8,7 +8,7 @@
   font-size: 3rem;
   text-align: center;
   margin: 1rem 0;
-  color: #1e40af; /* blue-800 */
+  color: #003399; /* Royal Blue */
 }
 
 .hero-content {
@@ -35,25 +35,28 @@
   margin: 0 auto;
 }
 
+/* Real Madrid Chat Window */
 .chat-window {
-  background: linear-gradient(135deg, hsl(207, 70%, 75%), hsl(330, 70%, 75%));
+  background: url("../assets/download.png") no-repeat center center;
+  background-size: cover; /* ensures it fills the container */
   padding: 16px;
   border-radius: 12px;
   overflow-y: auto;
   width: 100%;
+  mix-blend-mode: multiply;
   max-width: 600px;
   max-height: 550px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
 
   /* Hide scrollbar */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .chat-window::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
 }
 
 .chat-message {
@@ -64,21 +67,28 @@
   font-size: 0.95rem;
 }
 
+/* Real Madrid Blue for User */
 .chat-message.user {
-  background-color: #004d98; /* Barça Blue */
+  background: rgba(0, 51, 153, 0.6); /* Same blue but with transparency */
+  backdrop-filter: blur(6px); /* adds the blur effect */
+  -webkit-backdrop-filter: blur(6px);
   color: white;
   margin-left: auto;
   text-align: right;
 }
 
+/* Gold Accent for Model Messages */
 .chat-message.model {
-  background-color: #a50044; /* Barça Garnet */
-  color: white;
+  background: rgba(212, 175, 55, 0.6); /* gold with transparency */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  color: #000;
   margin-right: auto;
   text-align: left;
 }
 
-/* Chatbot Search Bar */
+/* Chatbot Search Bar - Gold & Blue */
 .chatbot-search-bar {
   margin: 30px auto 0 auto;
   display: flex;
@@ -86,7 +96,7 @@
   justify-content: center;
   width: 90%;
   max-width: 600px;
-  background: linear-gradient(135deg, #a50044, #004d98);
+  background: linear-gradient(135deg, #003399, #d4af37);
   border-radius: 30px;
   padding: 5px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
@@ -103,7 +113,7 @@
 }
 
 .chatbot-search-bar button {
-  background: #fcb913; /* Barça Yellow */
+  background: #d4af37;
   border: none;
   padding: 12px 20px;
   border-radius: 0 30px 30px 0;
@@ -111,20 +121,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
+  color: #003399;
+  font-weight: bold;
 }
 
 .chatbot-search-bar button:hover {
-  background: #ffe34d;
+  background: #f7e49e; /* Light gold hover */
+  color: #000;
 }
 
 .chatbot-login-warning {
   text-align: center;
+  color: #000 !important;
+  margin: 0 auto; /* centers the block horizontally */
+  display: block !important;
+  width: fit-content; /* makes width shrink to content */
 }
 
 .chatbot-login-warning a {
   text-decoration: underline;
-  color: #004d98;
+  color: #003399;
 }
 
 /* Responsive Design */

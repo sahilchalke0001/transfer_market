@@ -1,0 +1,135 @@
+.player-detect-container {
+  max-width: 700px;
+  min-height: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #0f52ba;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.player-detect-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.file-input {
+  background: #222;
+  padding: 0.8rem;
+  border-radius: 10px;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.detect-button {
+  background-color: #00e1ff;
+  color: #1b1f3b;
+  font-weight: bold;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.detect-button:hover {
+  background-color: #00b3cc;
+}
+
+.error-message {
+  color: #ff4b4b;
+  margin-top: 1rem;
+}
+
+.result-section {
+  margin-top: 2rem;
+}
+
+.video-preview {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.success-message {
+  color: #00ff91;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.auth-warning {
+  color: #bbb;
+  font-size: 1rem;
+}
+
+.sign-in-link {
+  color: #00529f;
+  text-decoration: underline;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Hide the default file input */
+.hidden-input {
+  display: none;
+}
+
+/* Custom-styled Choose File button */
+.custom-file-button {
+  background: linear-gradient(90deg, #ffffff, #00529f);
+  color: #ffffff;
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: none;
+  text-align: center;
+}
+
+.custom-file-button:hover {
+  background: linear-gradient(90deg, #e6e6e6, #003c7a);
+  transform: scale(1.05);
+  color: rgb(3, 0, 0);
+}
+
+/* Start Detection button styling */
+.detect-button {
+  background: linear-gradient(90deg, #ffffff, #00529f);
+  color: #3a3a3a;
+  padding: 10px 25px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.detect-button:hover {
+  background: linear-gradient(90deg, #e6e6e6, #003c7a);
+  color: #000000;
+}
+
+.detect-button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}

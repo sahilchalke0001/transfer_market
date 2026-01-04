@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { SignUp, useUser, useAuth } from "@clerk/clerk-react";
-import loginImg from "../assets/login.jpg";
+import loginImg from "../assets/cr7bicycle.png";
 import "./SignInPage.css";
 
 const SignUpPage = () => {

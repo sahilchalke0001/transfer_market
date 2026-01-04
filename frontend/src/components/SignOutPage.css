@@ -1,7 +1,7 @@
 /* src/components/SignOutPage.css */
 
 .signout-page {
-  background: linear-gradient(to right, #a50044, #004d98);
+  background: linear-gradient(135deg, #ffffff, #003399);
   height: 100vh;
   overflow: hidden;
 }

@@ -1,0 +1,163 @@
+/* ===== CONTAINER STYLING ===== */
+.seriea-page-container {
+  max-width: 900px;
+  min-height: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  background-image: url("/c.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* ===== TITLE ===== */
+.seriea-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #ff0000;
+  margin-bottom: 50px;
+  border-bottom: 3px solid #d50000;
+  padding-bottom: 10px;
+}
+
+/* ===== TEAM INPUT SECTION ===== */
+.team-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.team-input {
+  width: 280px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.team-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.team-input:focus {
+  border-color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
+
+/* ===== BUTTON ===== */
+.predict-button {
+  background: linear-gradient(to right, #ff0000, #ff4d4d);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+.predict-button:hover {
+  background: linear-gradient(to right, #e60000, #ff1a1a);
+  transform: scale(1.05);
+}
+
+/* ===== ERROR MESSAGE ===== */
+.error-message {
+  background: rgba(255, 0, 0, 0.3);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: 15px;
+  backdrop-filter: blur(6px);
+}
+
+/* ===== PREDICTION RESULTS ===== */
+.prediction-results {
+  margin-top: 25px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  width: fit-content;
+  margin-inline: auto;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.outcome {
+  font-size: 1.1rem;
+  color: #ffdfdf;
+  margin-top: 5px;
+}
+
+/* ===== NAMING CONVENTION ===== */
+.naming-convention {
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 97%;
+  max-width: 800px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.naming-convention p {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.team-list span {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.25);
+  color: #000;
+  font-weight: 600;
+  margin: 5px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+}
+
+/* ===== AUTH / LOGIN ===== */
+.chatbot-login-warning {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  border-radius: 10px;
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.chatbot-login-warning a {
+  color: #ff4d4d;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.chatbot-login-warning a:hover {
+  text-decoration: underline;
+}
+
+/* ===== LOADING ===== */
+.loading-text {
+  color: #f1f5f9;
+}

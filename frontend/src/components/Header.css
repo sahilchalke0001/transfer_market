@@ -1,159 +1,107 @@
 .chatbot-header {
-  background: linear-gradient(135deg, #004d98 0%, #a50044 100%);
-  color: white;
-  padding: 30px 25px;
+  background: linear-gradient(
+    135deg,
+    #003399,
+    #ffffff
+  ); /* Royal Blue → White */
+  color: #003399; /* Royal Blue text */
   text-align: center;
-  width: 100%;
-  box-sizing: border-box;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  animation: fadeInDown 1s ease-out;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  padding: 1.2rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-bottom: 3px solid #d4af37; /* Gold accent line */
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .chatbot-header-content {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.chatbot-icon {
-  font-size: 40px;
-  color: #fdb913; /* Real Madrid gold */
-  transition: transform 0.3s ease;
-}
-
-.chatbot-icon:hover {
-  transform: scale(1.2);
+  align-items: center;
+  gap: 1rem;
 }
 
 .madrid-logo {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #ffffff77;
-  transition: transform 0.3s ease;
-}
-
-.madrid-logo:hover {
-  transform: scale(1.2);
+  width: 60px;
+  height: auto;
+  mix-blend-mode: multiply;
 }
 
 .chatbot-header h1 {
-  margin: 0;
-  font-size: 3.2em;
-  letter-spacing: 2px;
+  font-size: 2rem;
   font-weight: 700;
-  color: #fdb913;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, color 0.3s ease;
+  color: #ffffff; /* White text for contrast */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.chatbot-header h1:hover {
-  transform: scale(1.05);
-  color: #ffffff;
-  text-shadow: 0 0 10px #fdb913;
-}
-
+/* Slogan */
 .chatbot-header p {
-  margin-top: 12px;
-  font-size: 1.5em;
-  font-weight: 300;
-  opacity: 0.95;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  color: #003399;
+  font-weight: 600;
+  margin-top: 0.3rem;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .chatbot-header {
-    padding: 25px 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
-
-  .chatbot-header h1 {
-    font-size: 2.4em;
-  }
-
-  .chatbot-header p {
-    font-size: 1.2em;
-  }
-
-  .chatbot-icon,
-  .madrid-logo {
-    font-size: 32px;
-    height: 32px;
-    width: 32px;
-  }
-}
-
-@media (max-width: 480px) {
-  .chatbot-header {
-    padding: 20px 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
-
-  .chatbot-header h1 {
-    font-size: 1.9em;
-  }
-
-  .chatbot-header p {
-    font-size: 1em;
-  }
-
-  .chatbot-icon,
-  .madrid-logo {
-    font-size: 28px;
-    height: 28px;
-    width: 28px;
-  }
-}
-
-.sign-button-container {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1;
+/* Navigation Bar for Leagues */
+.league-nav {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.league-btn {
+  background: linear-gradient(135deg, #ffffff, #d4af37);
+  color: #003399;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.league-btn:hover {
+  background: linear-gradient(135deg, #003399, #d4af37);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Sign-in/Sign-out Buttons */
+.sign-button-container {
+  margin-top: 1rem;
 }
 
 .sign-button {
-  background: linear-gradient(135deg, #a50044, #004d98); /* Barça colors */
-  color: white;
-  padding: 10px 20px;
+  background: linear-gradient(135deg, #d4af37, #ffffff);
   border: none;
   border-radius: 25px;
+  color: #003399;
+  padding: 8px 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
-  display: flex;
-  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .sign-button:hover {
-  background: linear-gradient(135deg, #004d98, #a50044);
+  background: linear-gradient(135deg, #003399, #d4af37);
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
-.email-text {
-  font-weight: bold;
-  font-size: 0.95em;
+/* Responsive */
+@media (max-width: 768px) {
+  .chatbot-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .madrid-logo {
+    width: 45px;
+  }
+
+  .league-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
 }

@@ -1,0 +1,162 @@
+/* FootballChat.css */
+
+/* Make the whole container fill the screen */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 70vh; /* full viewport height */
+  max-width: 600px;
+  margin: 0 auto;
+  background: #1e1e2f; /* dark theme */
+  color: #f0f0f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Header */
+.chat-container h2 {
+  background: #0d47a1; /* deep blue header */
+  padding: 15px;
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #ffc107; /* football accent color */
+}
+
+/* Chat messages box should take remaining space */
+.chat-box {
+  flex: 1; /* this makes it grow and fill space */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  background: #2c2c3c;
+}
+
+/* Individual message */
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  background: #3a3a50;
+  padding: 10px 12px;
+  border-radius: 10px;
+  word-wrap: break-word;
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Sender email */
+.chat-user-email {
+  font-size: 0.8rem;
+  color: #ffc107;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Message text */
+.chat-user-text {
+  font-size: 1rem;
+  color: #f0f0f0;
+}
+
+/* Sending loader */
+.chat-message.Sending {
+  text-align: center;
+  color: #00e676;
+  font-weight: bold;
+}
+
+/* Input section at the bottom */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background: #1e1e2f;
+  border-top: 2px solid #0d47a1;
+}
+
+/* Input box */
+.chat-input input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #2c2c3c;
+  color: #f0f0f0;
+  margin-right: 10px;
+}
+
+.chat-input input::placeholder {
+  color: #b0b0b0;
+}
+
+/* Send button */
+.chat-input button {
+  padding: 10px 20px;
+  background: #0d47a1;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.chat-input button:hover {
+  background: #1565c0;
+}
+
+/* Scrollbar style */
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background: #0d47a1;
+  border-radius: 4px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+  background: #2c2c3c;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.Rutu2 {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: white;
+  text-align: center;
+}
+
+#rutu2 {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+#rutu2:hover {
+  transform: scale(1.1);
+  color: #2286f1;
+}

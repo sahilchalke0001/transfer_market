@@ -1,0 +1,170 @@
+/* =========================
+   MAIN CONTAINER
+========================= */
+.football-container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 28px;
+  min-height: 52vh;
+  background: linear-gradient(135deg, #003399, #ffffff);
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(30, 58, 138, 0.18);
+  perspective: 1200px; /* Needed for tilt */
+}
+
+/* =========================
+   TITLE
+========================= */
+.football-title {
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 900;
+  margin-bottom: 30px;
+  color: #1e3a8a;
+  letter-spacing: 0.6px;
+}
+
+/* =========================
+   MATCH LIST
+========================= */
+.match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* =========================
+   MATCH CARD (TILT EFFECT)
+========================= */
+.match-card {
+  background: linear-gradient(135deg, #0b1c3d 0%, #1e40af 100%);
+  color: #ffffff;
+  padding: 18px 24px;
+  border-radius: 18px;
+  display: grid;
+  grid-template-columns: 2.3fr 0.7fr 1fr;
+  align-items: center;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35);
+  overflow: hidden;
+}
+
+/* GOLD STRIPE */
+.match-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: linear-gradient(180deg, #fde68a, #facc15);
+}
+
+/* TILT ON HOVER */
+.match-card:hover {
+  transform: rotateY(-6deg) rotateX(3deg) scale(1.03);
+  box-shadow: 0 22px 45px rgba(30, 58, 138, 0.45);
+}
+
+/* =========================
+   TEAMS
+========================= */
+.teams {
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.4px;
+}
+
+/* =========================
+   SCORE
+========================= */
+.score {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-align: center;
+  color: #facc15;
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.6);
+}
+
+/* =========================
+   TIME
+========================= */
+.time {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  text-align: right;
+  color: #e5e7eb;
+}
+
+/* =========================
+   STATES
+========================= */
+.loading-text {
+  text-align: center;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.error-message {
+  text-align: center;
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.auth-warning {
+  text-align: center;
+  font-size: 1rem;
+  color: #374151;
+}
+
+.auth-warning a {
+  color: #1e3a8a;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.auth-warning a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .match-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .match-card:hover {
+    transform: scale(1.02);
+  }
+
+  .time {
+    text-align: center;
+  }
+}
+
+#rutu {
+  color: rgb(17, 5, 175);
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+#rutu:hover {
+  transform: scale(1.1);
+  color: #ffffff;
+}
+
+.Rutu1 {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: white;
+  text-align: center;
+}
