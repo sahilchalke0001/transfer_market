@@ -125,4 +125,4 @@ The RAG chatbot is fully instrumented with **Arize Phoenix** for production-grad
 
 ## Author
 
-Built by Sahil
+Built by Sahil Chalke
