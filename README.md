@@ -1,10 +1,10 @@
-```markdown
+
 # Football Intelligence Platform
 
 A full-stack football analytics and AI platform built with React, Flask, and LangChain.
 
 ---
-<img width="1238" height="886" alt="image" src="https://github.com/user-attachments/assets/55892967-51a9-4ca8-85ce-2108248621a1" />
+<img width="1238" height="886" alt="image" src="https://github.com/user-attachments/assets/8cb57be3-0760-41bb-9dfb-1b75456318f3" />
 ## Features
 
 ### 1. La Liga Analytics
@@ -126,4 +126,3 @@ The RAG chatbot is fully instrumented with **Arize Phoenix** for production-grad
 ## Author
 
 Built by Sahil
-```
