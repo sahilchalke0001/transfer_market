@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-// 🆕 Using the actual useUser hook for authentication
 import { useUser } from "@clerk/clerk-react";
-// 🆕 Importing the separated stylesheet
 import "./PremierLeaguePage.css";
 
 // --- Custom SVG Icons ---
@@ -42,7 +40,6 @@ const AlertTriangleIcon = (props) => (
   </svg>
 );
 
-// Team Names from the Python code
 const TEAM_NAMES = [
   "Arsenal",
   "Chelsea",
@@ -98,7 +95,6 @@ const TEAM_NAMES = [
 const Note_message =
   "The model has been trained on 25 years of historical results (1999-2024). It makes predictions based on past encounters between the teams and their current form. Please note that these predictions are not guaranteed to be accurate and should be used as a guide rather than a definitive forecast. Factors not accounted for by the model can influence match outcomes.";
 
-// --- Main Component ---
 function PremierLeaguePage() {
   const [homeTeam, setHomeTeam] = useState("");
   const [awayTeam, setAwayTeam] = useState("");
@@ -107,11 +103,9 @@ function PremierLeaguePage() {
   const [error, setError] = useState(null);
   const [isNoteExpanded, setIsNoteExpanded] = useState(false);
 
-  // 🆕 Using the real Clerk hook instead of the simulation
   const { isSignedIn, isLoaded } = useUser();
 
   const handlePredict = async () => {
-    // Input validation (same as before)
     if (!homeTeam.trim() || !awayTeam.trim()) {
       setError("Please enter both team names.");
       setPredictionResult(null);
@@ -140,9 +134,7 @@ function PremierLeaguePage() {
     try {
       const resp = await fetch("http://127.0.0.1:5000/pl_predict", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           home_team: homeTeam.trim(),
           away_team: awayTeam.trim(),
@@ -174,14 +166,38 @@ function PremierLeaguePage() {
     }
   };
 
-  // Helper to render the team names
   const highlightedTeamNames = TEAM_NAMES.map((name, index) => (
     <span key={index} className="team-tag">
       {name}
     </span>
   ));
 
-  // --- Conditional Renders based on Auth State ---
+  // --- Manchester United Anthem Autoplay ---
+  useEffect(() => {
+    if (!predictionResult) return;
+
+    const manUWin =
+      (predictionResult.outcome === "Home Win" && homeTeam === "Man United") ||
+      (predictionResult.outcome === "Away Win" && awayTeam === "Man United");
+
+    if (manUWin) {
+      const anthem = new Audio("/Manchester_United_F.C_Anthem.ogg");
+      anthem.volume = 0.5;
+      anthem.play().catch((err) => console.log("Autoplay blocked:", err));
+
+      // Stop after 1 minute
+      const timeout = setTimeout(() => {
+        anthem.pause();
+        anthem.currentTime = 0;
+      }, 90000);
+
+      return () => {
+        anthem.pause();
+        anthem.currentTime = 0;
+        clearTimeout(timeout);
+      };
+    }
+  }, [predictionResult, homeTeam, awayTeam]);
 
   if (!isLoaded) {
     return (
@@ -201,7 +217,7 @@ function PremierLeaguePage() {
       <div className="container auth-warning-container">
         <h2 className="header-title-auth">Premier League Match Predictor </h2>
         <p className="auth-warning-message">
-          🔒 Please {/* 🆕 Using a standard link for auth */}
+          🔒 Please{" "}
           <a href="/sign-in" className="auth-link">
             sign in
           </a>{" "}
@@ -211,104 +227,93 @@ function PremierLeaguePage() {
     );
   }
 
-  // --- Main Predictor UI (if signed in) ---
   return (
-    <>
-      {/* 💅 Style block removed and placed in PremierLeaguePage.css */}
-
-      <div className="container">
-        <div className="header-flex">
-          <h2 className="header-title">Premier League Match Predictor </h2>
-        </div>
-        {/* Input Section */}
-        <div className="input-group">
-          <input
-            type="text"
-            placeholder="Enter Home Team (e.g., Man United)"
-            value={homeTeam}
-            onChange={(e) => setHomeTeam(e.target.value)}
-            className="input-field"
-          />
-          <input
-            type="text"
-            placeholder="Enter Away Team (e.g., Liverpool)"
-            value={awayTeam}
-            onChange={(e) => setAwayTeam(e.target.value)}
-            className="input-field"
-          />
-          <button
-            onClick={handlePredict}
-            disabled={loading || !homeTeam.trim() || !awayTeam.trim()}
-            className="predict-button"
-          >
-            {loading ? (
-              <>
-                <LoaderIcon
-                  style={{ width: "20px", height: "20px", marginRight: "8px" }}
-                />{" "}
-                Processing...
-              </>
-            ) : (
-              "Predict Match Outcome"
-            )}
-          </button>
-        </div>
-
-        {/* Naming Convention */}
-        <div className="team-list-wrapper">
-          <p className="team-list-header">Accepted Naming Conventions:</p>
-          <div className="team-tags-container">{highlightedTeamNames}</div>
-        </div>
-
-        {/* Error Message */}
-        {error && (
-          <p className="error-message">
-            <AlertTriangleIcon
-              style={{ width: "20px", height: "20px", marginRight: "8px" }}
-            />{" "}
-            {error}
-          </p>
-        )}
-
-        {/* Prediction Results */}
-        {predictionResult && (
-          <div
-            className={`result-box ${
-              predictionResult.outcome === "Draw" ? "draw" : "win"
-            }`}
-          >
-            <h3 className="result-header">Prediction Result:</h3>
-
-            <p className="score-line">
-              {homeTeam} &nbsp;
-              <span className="home-score">{predictionResult.homeGoals}</span>
-              <span className="separator">-</span>
-              <span className="away-score">{predictionResult.awayGoals}</span>
-              &nbsp;
-              {awayTeam}
-            </p>
-
-            <div className="outcome-message-wrapper">
-              {predictionResult.outcome === "Home Win" && (
-                <p className="outcome-message win-color animate-bounce">
-                  The match result prediction: {homeTeam} wins the match!
-                </p>
-              )}
-              {predictionResult.outcome === "Away Win" && (
-                <p className="outcome-message win-color animate-bounce">
-                  The match result prediction: {awayTeam} wins the match!
-                </p>
-              )}
-              {predictionResult.outcome === "Draw" && (
-                <p className="outcome-message draw-color">
-                  The match result prediction: The match ends in a draw!
-                </p>
-              )}
-            </div>
-          </div>
-        )}
+    <div className="container">
+      <div className="header-flex">
+        <h2 className="header-title">Premier League Match Predictor </h2>
       </div>
-    </>
+
+      <div className="input-group">
+        <input
+          type="text"
+          placeholder="Enter Home Team (e.g., Man United)"
+          value={homeTeam}
+          onChange={(e) => setHomeTeam(e.target.value)}
+          className="input-field"
+        />
+        <input
+          type="text"
+          placeholder="Enter Away Team (e.g., Liverpool)"
+          value={awayTeam}
+          onChange={(e) => setAwayTeam(e.target.value)}
+          className="input-field"
+        />
+        <button
+          onClick={handlePredict}
+          disabled={loading || !homeTeam.trim() || !awayTeam.trim()}
+          className="predict-button"
+        >
+          {loading ? (
+            <>
+              <LoaderIcon
+                style={{ width: "20px", height: "20px", marginRight: "8px" }}
+              />{" "}
+              Processing...
+            </>
+          ) : (
+            "Predict Match Outcome"
+          )}
+        </button>
+      </div>
+
+      <div className="team-list-wrapper">
+        <p className="team-list-header">Accepted Naming Conventions:</p>
+        <div className="team-tags-container">{highlightedTeamNames}</div>
+      </div>
+
+      {error && (
+        <p className="error-message">
+          <AlertTriangleIcon
+            style={{ width: "20px", height: "20px", marginRight: "8px" }}
+          />{" "}
+          {error}
+        </p>
+      )}
+
+      {predictionResult && (
+        <div
+          className={`result-box ${
+            predictionResult.outcome === "Draw" ? "draw" : "win"
+          }`}
+        >
+          <h3 className="result-header">Prediction Result:</h3>
+          <p className="score-line">
+            {homeTeam} &nbsp;
+            <span className="home-score">{predictionResult.homeGoals}</span>
+            <span className="separator">-</span>
+            <span className="away-score">{predictionResult.awayGoals}</span>
+            &nbsp; {awayTeam}
+          </p>
+          <div className="outcome-message-wrapper">
+            {predictionResult.outcome === "Home Win" && (
+              <p className="outcome-message win-color animate-bounce">
+                The match result prediction: {homeTeam} wins the match!
+              </p>
+            )}
+            {predictionResult.outcome === "Away Win" && (
+              <p className="outcome-message win-color animate-bounce">
+                The match result prediction: {awayTeam} wins the match!
+              </p>
+            )}
+            {predictionResult.outcome === "Draw" && (
+              <p className="outcome-message draw-color">
+                The match result prediction: The match ends in a draw!
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 

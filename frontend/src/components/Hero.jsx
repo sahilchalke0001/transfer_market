@@ -69,7 +69,13 @@ const Hero = () => {
       const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: message }),
+        body: JSON.stringify({
+          question: message,
+          senderId: user?.id || "anonymous", // ✅ Clerk user ID
+          senderName: user?.fullName || "Anonymous", // ✅ Clerk name
+          senderEmail:
+            user?.primaryEmailAddress?.emailAddress || "unknown@example.com", // ✅ Clerk email
+        }),
       });
       if (!res.ok) throw new Error(`Server error: ${res.statusText}`);
 
@@ -77,7 +83,6 @@ const Hero = () => {
       const botMsg = { role: "model", text: data.answer || "No response" };
       setChatLog((prev) => [...prev, botMsg]);
       await saveChatToDB([botMsg]);
-      // If you’d like to surface `data.context`, keep it here.
     } catch (err) {
       const errorBotMsg = { role: "model", text: "❌ Error. Try again." };
       setChatLog((prev) => [...prev, errorBotMsg]);

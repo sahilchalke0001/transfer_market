@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RAG Chatbot Metrics</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; padding: 24px; }
+    h1 { font-size: 24px; color: #38bdf8; margin-bottom: 24px; }
+    h2 { font-size: 16px; color: #94a3b8; margin-bottom: 12px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+    .card { background: #1e293b; border-radius: 12px; padding: 20px; text-align: center; }
+    .card .value { font-size: 36px; font-weight: bold; color: #38bdf8; }
+    .card .label { font-size: 13px; color: #64748b; margin-top: 4px; }
+    .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .chart-box { background: #1e293b; border-radius: 12px; padding: 20px; }
+    .table-box { background: #1e293b; border-radius: 12px; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 8px 12px; color: #64748b; border-bottom: 1px solid #334155; }
+    td { padding: 8px 12px; border-bottom: 1px solid #1e293b; }
+    tr:hover td { background: #0f172a; }
+    .fast { color: #4ade80; } .slow { color: #f87171; } .mid { color: #fbbf24; }
+  </style>
+</head>
+<body>
+  <h1>⚽ RAG Chatbot — Metrics Dashboard</h1>
+
+  <!-- Summary Cards -->
+  <div class="grid">
+    <div class="card"><div class="value">7</div><div class="label">Total Requests</div></div>
+    <div class="card"><div class="value">13.6s</div><div class="label">Avg Latency</div></div>
+    <div class="card"><div class="value fast">6.8s</div><div class="label">Fastest</div></div>
+    <div class="card"><div class="value slow">29.2s</div><div class="label">Slowest</div></div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts">
+    <div class="chart-box">
+      <h2>📈 Requests per Hour</h2>
+      <canvas id="hourlyChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h2>👤 Requests per User</h2>
+      <canvas id="userChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Recent Requests Table -->
+  <div class="table-box">
+    <h2>🕐 Recent Requests</h2>
+    <table>
+      <thead><tr><th>Time</th><th>Question</th><th>User</th><th>Latency</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>2026-05-15 11:31:50</td>
+          <td>hi.</td>
+          <td>user_2ztlIWJPNekF8bi</td>
+          <td class="mid">18.26s</td>
+        </tr><tr>
+          <td>2026-05-15 11:12:00</td>
+          <td>what is red card?</td>
+          <td>anonymous</td>
+          <td class="fast">7.12s</td>
+        </tr><tr>
+          <td>2026-05-15 11:08:10</td>
+          <td>what is a red card?</td>
+          <td>anonymous</td>
+          <td class="fast">9.49s</td>
+        </tr><tr>
+          <td>2026-05-15 11:06:58</td>
+          <td>hey.</td>
+          <td>anonymous</td>
+          <td class="mid">16.91s</td>
+        </tr><tr>
+          <td>2026-05-15 10:13:58</td>
+          <td>have you ever won the world cup</td>
+          <td>anonymous</td>
+          <td class="fast">7.72s</td>
+        </tr><tr>
+          <td>2026-05-15 10:13:05</td>
+          <td>have you ever won the world cup?</td>
+          <td>anonymous</td>
+          <td class="fast">6.79s</td>
+        </tr><tr>
+          <td>2026-05-15 10:11:45</td>
+          <td>hello.</td>
+          <td>anonymous</td>
+          <td class="slow">29.2s</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Hourly chart
+    new Chart(document.getElementById("hourlyChart"), {
+      type: "bar",
+      data: {
+        labels: ["2026-05-15 10:00:00+00:00", "2026-05-15 11:00:00+00:00"],
+        datasets: [
+          { label: "Requests", data: [3, 4], backgroundColor: "#38bdf8" },
+          { label: "Avg Latency (s)", data: [14.57, 12.94], backgroundColor: "#818cf8", type: "line", yAxisID: "y2" }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y:  { beginAtZero: true, ticks: { color: "#94a3b8" }, grid: { color: "#1e293b" } },
+          y2: { beginAtZero: true, position: "right", ticks: { color: "#94a3b8" }, grid: { drawOnChartArea: false } },
+          x:  { ticks: { color: "#94a3b8" }, grid: { color: "#334155" } }
+        },
+        plugins: { legend: { labels: { color: "#e2e8f0" } } }
+      }
+    });
+
+    // User chart
+    new Chart(document.getElementById("userChart"), {
+      type: "doughnut",
+      data: {
+        labels: ["anonymous", "user_2ztlIWJPNekF8bi"],
+        datasets: [{ 
+          data: [6, 1],
+          backgroundColor: ["#38bdf8", "#818cf8", "#4ade80", "#fbbf24", "#f87171"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: "#e2e8f0" } } }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -111,10 +111,10 @@ function PlayerDetection() {
 
       {resultUrl && (
         <div className="result-section">
-          <h3>🎥 Processed Video Preview</h3>
+          <h3> Processed Video Preview</h3>
           <video src={resultUrl} controls className="video-preview" />
           <p className="success-message">
-            ✅ Player detection completed successfully!
+            Player detection completed successfully!
           </p>
         </div>
       )}

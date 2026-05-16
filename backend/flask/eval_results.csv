@@ -1,0 +1,4 @@
+span_id,question,answer,relevance_score,relevance_reason,hallucination_score,hallucination_reason,quality_score,quality_reason
+f75cf635bacf113b,have you ever won the world cup,"My friend, I must be honest with you. As a legendary player, I've had an incredible career, but unfo",9,directly addresses question,6,imagines self as legendary player,8,well-written and engaging response
+b57616efbee04780,have you ever won the world cup?,"My friend, I'm afraid I must correct you. As Cristiano Ronaldo, I have not yet won the FIFA World Cu",10,directly addresses question,9,answer is fictional but clearly stated as such,8,well-written and engaging response
+d6a091ebfa461422,hello.,"Hello! It's great to be speaking with you. As Cristiano Ronaldo, I've had my fair share of interacti",2,off-topic answer,9,unrelated information,6,lack of direct response

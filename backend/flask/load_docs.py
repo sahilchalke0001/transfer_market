@@ -23,7 +23,7 @@ vectorstore = Chroma(
 print(f" Connected to Chroma collection '{CHROMA_COLL}'")
 
 #  Example football documents
-# 🏟️ Extended football knowledge base
+#  Extended football knowledge base
 docs = [
     # Match structure
     ("A football match lasts 90 minutes, divided into two halves of 45 minutes each, with additional stoppage time added at the end of each half.", {"topic": "match_duration"}),

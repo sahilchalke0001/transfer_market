@@ -2,51 +2,101 @@ import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import "./FootballMatches.css";
 
+/* 🔥 Top 5 European Leagues */
+const TOP_5_LEAGUES = [
+  "Premier League",
+  "La Liga",
+  "Serie A",
+  "Bundesliga",
+  "Ligue 1",
+];
+
 function FootballMatches() {
   const { isLoaded, isSignedIn } = useUser();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  // REAL top leagues (API-Football)
-  const topLeagues = [39, 140, 135, 78, 61];
+  const [title, setTitle] = useState("⚽ Today’s Football Matches");
 
   useEffect(() => {
     if (!isSignedIn) return;
 
     const fetchMatches = async () => {
+      setLoading(true);
+      setError("");
+
       try {
-        const response = await fetch(
-          "http://127.0.0.1:5000/live-matches-today"
-        );
+        const res = await fetch("http://127.0.0.1:5000/live-matches-today");
+        if (!res.ok) throw new Error("API failed");
 
-        if (!response.ok) throw new Error("Fetch failed");
+        const data = await res.json();
 
-        const data = await response.json();
+        /* 🟢 LIVE or TODAY matches */
+        if (data.matches && Array.isArray(data.matches)) {
+          setTitle(
+            data.type === "live"
+              ? "🔴 Live Football Matches (Top 5 Leagues)"
+              : "⚽ Today’s Football Matches (Top 5 Leagues)"
+          );
 
-        const filtered =
-          data.filter((m) => topLeagues.includes(m.league.id)).length > 0
-            ? data.filter((m) => topLeagues.includes(m.league.id))
-            : data;
+          const filteredMatches = data.matches
+            .filter((m) => TOP_5_LEAGUES.includes(m.league))
+            .slice(0, 5);
 
-        const formatted = filtered.map((match) => ({
-          id: match.fixture.id,
-          homeName: match.teams.home.name,
-          awayName: match.teams.away.name,
-          leagueId: match.league.id,
-          time: new Date(match.fixture.date).toLocaleString(),
-          status: match.fixture.status.short,
-        }));
+          setMatches(
+            filteredMatches.map((m, i) => ({
+              id: i,
+              homeName: m.home_team,
+              awayName: m.away_team,
+              homeScore: m.home_score ?? 0,
+              awayScore: m.away_score ?? 0,
+              status: m.status,
+              minute: m.minute,
+              league: m.league,
+            }))
+          );
+          return;
+        }
 
-        setMatches(formatted);
+        /* 🟡 NO matches today → FUTURE matches */
+        if (data.type === "none") {
+          const futureRes = await fetch("http://127.0.0.1:5000/future-matches");
+
+          if (!futureRes.ok) throw new Error("Future API failed");
+
+          const futureData = await futureRes.json();
+
+          setTitle("📅 Upcoming Football Matches (Top 5 Leagues)");
+
+          const filteredFuture = futureData
+            .filter((m) => TOP_5_LEAGUES.includes(m.league))
+            .slice(0, 5);
+
+          setMatches(
+            filteredFuture.map((m, i) => ({
+              id: i,
+              homeName: m.home_team,
+              awayName: m.away_team,
+              homeScore: 0,
+              awayScore: 0,
+              status: m.date,
+              minute: null,
+              league: m.league,
+            }))
+          );
+        }
       } catch (err) {
+        console.error(err);
         setError("Unable to load football matches.");
+        setMatches([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchMatches();
+    const interval = setInterval(fetchMatches, 30000);
+    return () => clearInterval(interval);
   }, [isSignedIn]);
 
   if (!isLoaded) return <p>Loading authentication...</p>;
@@ -54,15 +104,9 @@ function FootballMatches() {
   if (!isSignedIn) {
     return (
       <div className="football-container">
-        <h2>⚽Today’s Football Matches</h2>
+        <h2>{title}</h2>
         <div className="Rutu1">
-          <p>
-            🔒 Please{" "}
-            <a href="/sign-in" id="rutu">
-              sign in
-            </a>{" "}
-            to view matches.
-          </p>
+          🔒 Please <a href="/sign-in">sign in</a> to view matches.
         </div>
       </div>
     );
@@ -70,30 +114,39 @@ function FootballMatches() {
 
   return (
     <div className="football-container">
-      <h2>⚽ Today’s Football Matches</h2>
+      <h2>{title}</h2>
 
       {loading && <p>Loading matches...</p>}
-      {error && <p className="error-message">🚨 {error}</p>}
-      {!loading && matches.length === 0 && (
-        <p>No matches scheduled for today.</p>
+
+      {!loading && error && <p className="error-message">🚨 {error}</p>}
+
+      {!loading && !error && matches.length === 0 && (
+        <p>No Top 5 league matches available.</p>
       )}
 
-      <div className="match-list">
-        {matches.map((match) => (
-          <div key={match.id} className="match-card">
-            <div className="teams">
-              <span>{match.homeName}</span> <strong>vs</strong>{" "}
-              <span>{match.awayName}</span>
-            </div>
+      {!loading && !error && matches.length > 0 && (
+        <div className="match-list">
+          {matches.map((m) => (
+            <div key={m.id} className="match-card">
+              <div className="teams">
+                {m.homeName} <strong>vs</strong> {m.awayName}
+              </div>
 
-            <div className="score">
-              {match.status === "LIVE" ? "🔴 LIVE" : "- :-"}
-            </div>
+              <div className="score">
+                {m.minute !== null ? (
+                  <>
+                    🔴 LIVE {m.homeScore} - {m.awayScore} ({m.minute}')
+                  </>
+                ) : (
+                  <>{m.status}</>
+                )}
+              </div>
 
-            <div className="time">{match.time}</div>
-          </div>
-        ))}
-      </div>
+              <div className="league">{m.league}</div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
